@@ -9,16 +9,15 @@ import retrofit.http.Path;
 import com.baasbox.jaasbox.requests.UserLoginRequest;
 import com.baasbox.jaasbox.requests.UserSignupRequest;
 import com.baasbox.jaasbox.responses.LogoutResponse;
-import com.baasbox.jaasbox.responses.UserLoginResponse;
 import com.baasbox.jaasbox.responses.UserResponse;
 
 public interface BaasboxAPI {
 	
   @POST(value = "/user")
-  public void signupUser(@Body UserSignupRequest request, Callback<UserLoginResponse> response);
+  public void signupUser(@Body UserSignupRequest request, Callback<UserResponse> response);
 
   @POST(value = "/login")
-  public void loginUser(@Body UserLoginRequest userLoginRequest, Callback<UserLoginResponse> callback);
+  public void loginUser(@Body UserLoginRequest userLoginRequest, Callback<UserResponse> callback);
 	
   @GET(value = "/me")
   public void me(Callback<UserResponse> response);

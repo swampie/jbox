@@ -4,9 +4,9 @@ import retrofit.Callback;
 
 import com.baasbox.jaasbox.BBRequest;
 import com.baasbox.jaasbox.BaasboxAPI;
-import com.baasbox.jaasbox.responses.UserLoginResponse;
+import com.baasbox.jaasbox.responses.UserResponse;
 
-public class UserLoginRequest extends BBRequest<UserLoginResponse> {
+public class UserLoginRequest extends BBRequest<UserResponse> {
 
   private String username;
   private String password;
@@ -31,7 +31,7 @@ public class UserLoginRequest extends BBRequest<UserLoginResponse> {
   }
 
   @Override
-  protected void makeRequest(BaasboxAPI api, Callback<UserLoginResponse> callback) {
+  protected void makeRequest(BaasboxAPI api, Callback<UserResponse> callback) {
     api.loginUser(this, callback);
   }
 

@@ -43,15 +43,10 @@ public class BBRetrofitCallback<T extends BBResponse> implements Callback<T> {
             .fromBody(response.getBody(),
               ErrorResponse.class);
           reason = (errorResponse.message == null ? "" : errorResponse.message);
-        } catch (ConversionException e) {
+        } catch (ConversionException | ClassCastException e) {
           // response did not have a formatted error response...should not happen
           ex = e;
-          reason = "Although the FullContact API responded with an error, " +
-            "the response was not in the proper format.";
-        } catch (ClassCastException e) {
-          ex = e;
-          reason = "Although the FullContact API responded with an error, " +
-            "the response was not in the proper format.";
+          reason = "Response was not in the proper format.";
         }
         break;
       case UNEXPECTED:

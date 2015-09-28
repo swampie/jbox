@@ -6,10 +6,10 @@ import retrofit.Callback;
 
 import com.baasbox.jaasbox.BBRequest;
 import com.baasbox.jaasbox.BaasboxAPI;
-import com.baasbox.jaasbox.responses.UserLoginResponse;
+import com.baasbox.jaasbox.responses.UserResponse;
 import com.google.common.collect.Maps;
 
-public class UserSignupRequest extends BBRequest<UserLoginResponse> {
+public class UserSignupRequest extends BBRequest<UserResponse> {
   private String username;
   private String password;
   private Map<String, Object> visibleByTheUser = Maps.newHashMap();
@@ -44,7 +44,7 @@ public class UserSignupRequest extends BBRequest<UserLoginResponse> {
   private UserSignupRequest(){}
   
   @Override
-  protected void makeRequest(BaasboxAPI api, Callback<UserLoginResponse> callback) {
+  protected void makeRequest(BaasboxAPI api, Callback<UserResponse> callback) {
     api.signupUser(this, callback);
   }
   

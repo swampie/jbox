@@ -14,7 +14,7 @@ import com.baasbox.jaasbox.auth.Credentials;
 import com.baasbox.jaasbox.auth.SessionTokenInterceptor;
 import com.baasbox.jaasbox.requests.UserLoginRequest;
 import com.baasbox.jaasbox.requests.UserSignupRequest;
-import com.baasbox.jaasbox.responses.UserLoginResponse;
+import com.baasbox.jaasbox.responses.UserResponse;
 import com.squareup.okhttp.OkHttpClient;
 
 public class Jbox {
@@ -54,12 +54,12 @@ public class Jbox {
       jbox.appcode = appcode;
     }
 
-    public Jbox login(String username, String password, String appcode, BBCallback<UserLoginResponse> callback) {
+    public Jbox login(String username, String password, String appcode, BBCallback<UserResponse> callback) {
       jbox = build();
-      jbox.http.sendRequest(new UserLoginRequest(username, password, appcode), new BBCallback<UserLoginResponse>() {
+      jbox.http.sendRequest(new UserLoginRequest(username, password, appcode), new BBCallback<UserResponse>() {
 
         @Override
-        public void success(UserLoginResponse response) {
+        public void success(UserResponse response) {
           jbox.sessionToken = response.getSessionToken();
           callback.success(response);
         }
@@ -102,12 +102,12 @@ public class Jbox {
       return this;
     }
 
-    public Jbox signup(UserSignupRequest req, BBCallback<UserLoginResponse> callback) {
+    public Jbox signup(UserSignupRequest req, BBCallback<UserResponse> callback) {
       jbox = build();
-      jbox.http.sendRequest(req, new BBCallback<UserLoginResponse>() {
+      jbox.http.sendRequest(req, new BBCallback<UserResponse>() {
 
         @Override
-        public void success(UserLoginResponse response) {
+        public void success(UserResponse response) {
           jbox.sessionToken = response.getSessionToken();
           callback.success(response);
         }

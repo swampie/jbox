@@ -2,7 +2,9 @@ package com.baasbox.jaasbox;
 
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public abstract class BBResponse {
 
@@ -11,6 +13,9 @@ public abstract class BBResponse {
 
   @JsonProperty("data")
   protected Map<String, Object> data;
+
+  @JsonIgnore
+  public ObjectMapper om = new ObjectMapper();
 
   public int getStatus() {
     return status;
