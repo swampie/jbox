@@ -44,7 +44,6 @@ public class JboxHttp {
     try {
       return callback.get();
     } catch (InterruptedException e) {
-      e.printStackTrace();
       throw new BBException("Interrupted while waiting for a result!", e);
     }
   }

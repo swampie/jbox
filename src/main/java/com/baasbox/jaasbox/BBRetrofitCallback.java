@@ -17,6 +17,7 @@ public class BBRetrofitCallback<T extends BBResponse> implements Callback<T> {
     this.httpInterface = httpInterface;
   }
 
+  @Override
   public void success(T t, Response response) {
     parent.success(t);
   }
@@ -52,10 +53,11 @@ public class BBRetrofitCallback<T extends BBResponse> implements Callback<T> {
           reason = "Although the FullContact API responded with an error, " +
             "the response was not in the proper format.";
         }
+        break;
       case UNEXPECTED:
       default:
         break;
     }
-    parent.failure(new BBException(reason, (response == null ? null : response.getStatus()), ex));
+    parent.failure(new BBException(reason, response == null ? null : response.getStatus(), ex));
   }
 }

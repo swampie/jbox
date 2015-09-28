@@ -24,6 +24,7 @@ public abstract class BBResponse {
     this.data = data;
   }
 
+  @Override
   public String toString() {
     return this.getClass().getSimpleName() + ":" + status;
   }

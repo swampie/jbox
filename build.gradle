@@ -1,12 +1,26 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'sonar-runner'
 
 sourceCompatibility = 1.8
 version = '0.1-SNAPSHOT'
+group = 'com.baasbox'
 
 
 repositories {
     mavenCentral()
+}
+
+sonarRunner {
+  sonarProperties {
+      property "sonar.host.url", "http://95.85.29.65:9000/sonar"
+      property "sonar.jdbc.url", "jdbc:mysql://95.85.29.65:3306/sonar"
+      property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+      property "sonar.jdbc.username", "sonar"
+      property "sonar.jdbc.password", "sonar"
+      property "sonar.core.codeCoveragePlugin","jacoco"
+      property "sonar.jacoco.reportPath","$buildDir/jacoco/test.exec"
+  }
 }
 
 dependencies{
@@ -21,4 +35,8 @@ dependencies{
   
   compile group: 'commons-codec', name:'commons-codec', version:'1.2'
   
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.3'
 }

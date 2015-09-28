@@ -9,6 +9,8 @@ import com.baasbox.jaasbox.BBRequest;
 import com.baasbox.jaasbox.BBResponse;
 import com.baasbox.jaasbox.JboxHttp;
 import com.baasbox.jaasbox.auth.AppCodeInterceptor;
+import com.baasbox.jaasbox.auth.BasicAuthInterceptor;
+import com.baasbox.jaasbox.auth.Credentials;
 import com.baasbox.jaasbox.auth.SessionTokenInterceptor;
 import com.baasbox.jaasbox.requests.UserLoginRequest;
 import com.baasbox.jaasbox.requests.UserSignupRequest;
@@ -24,7 +26,7 @@ public class Jbox {
   JboxHttp http;
   OkHttpClient client;
   String sessionToken;
-  public AuthPolicy policy;
+  AuthPolicy policy;
 
   protected Jbox(String baseUrl) {
     this.baseUrl = baseUrl;
@@ -75,6 +77,8 @@ public class Jbox {
       this.client.interceptors().add(new AppCodeInterceptor(() -> jbox.appcode));
       if (this.authPolicy.equals(AuthPolicy.TOKEN)) {
         this.client.interceptors().add(new SessionTokenInterceptor(() -> jbox.sessionToken));
+      } else {
+        this.client.interceptors().add(new BasicAuthInterceptor(() -> new Credentials(jbox.username, jbox.password)));
       }
       jbox.http = new JboxHttp(new OkClient(this.client), jbox.baseUrl, new Integer(4), this.authPolicy);
       return jbox;
