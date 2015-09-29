@@ -25,4 +25,7 @@ public interface BaasboxAPI {
   @POST(value = "/logout/{pushToken}")
   public void logoutUser(@Path("user") String pushToken, Callback<LogoutResponse> callback);
 
+  @POST(value = "/me/suspend")
+  public void suspendMe(Callback<BBResponse> callback);
+
 }
